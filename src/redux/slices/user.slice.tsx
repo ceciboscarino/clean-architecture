@@ -8,7 +8,7 @@ import { UserEmptyState } from '@/models';
 export const userSlice = createSlice({
     name: 'user',
     initialState: UserEmptyState,
-    reducers: {
+    reducers: { 
         createUser: (state, action) => {
             return action.payload;
 
