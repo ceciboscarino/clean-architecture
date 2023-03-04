@@ -1,11 +1,13 @@
 export interface User{
     id: string;
     name: string;
+    email?: string;
 }
 
 export const UserEmptyState: User= {
     id: '',
-    name: ''
+    name: '',
+    email: ''
 }
 
 export interface ApiUser{

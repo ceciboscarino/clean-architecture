@@ -1,5 +1,6 @@
 import { createUser } from "@/redux/slices/user.slice";
 import { useDispatch } from "react-redux";
+import { serviceTemplate } from "../services/service-template";
 
 
 export default function CreateHomeButton() {
@@ -7,7 +8,7 @@ export default function CreateHomeButton() {
 
     const dispatchAction =() => {
         
-          dispatch (createUser({ name: 'John Doe' , id: 1 }));
+          dispatch (createUser(serviceTemplate));
     
         
       };
