@@ -1,7 +1,10 @@
-export * from './Dashboard';
 export * from './Login';
 export * from './Login/services';
-export { default as Home } from './home/Home';
-export * from './home/adapters';
-export * from './home/components';
-export * from './home/styled-components';
+export * from './Private/Dashboard';
+export { default as Home } from './Private/Home/Home';
+export * from './Private/Home/Index';
+export * from './Private/Home/adapters';
+export * from './Private/Home/components';
+export * from './Private/Home/services';
+export * from './Private/Home/styled-components';
+export * from './Private';

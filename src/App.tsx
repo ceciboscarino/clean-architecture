@@ -1,36 +1,45 @@
-import { useState } from 'react'
+import { Suspense, lazy } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
-import { Home } from './pages'
-import store, { AppStore } from './redux/store'
-import { useSelector } from 'react-redux'
-import { Login, Dashboard } from './pages'
-import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
-import { PrivateRoutes, PublicRoutes } from './models'
-import { AuthGuard } from './Guards'
 
+import store, { AppStore } from './redux/store'
+import { Provider, useSelector } from 'react-redux'
+
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { PrivateRoutes, PublicRoutes } from './models'
+import { AuthGuard, RolGuard } from './Guards'
+import RoutesWithNotFound from './Utilities/routes-with-not-found';
+import { Logout } from './components/Logout'
+
+const Login = lazy(() => import('./pages/Login/Login'))
+const Private = lazy(() => import('./pages/Private/Private'))
+import { Roles } from '@/models';
+import Dashboard from './pages/Private/Dashboard/Dashboard';
 
 function App() {
 
-  const user = useSelector((state: AppStore) => state.user);
+
 
   return (
 
     < div className='App'>
-
-      <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to= {PrivateRoutes.PRIVATE}/>}/>
-        <Route path="*" element={<>NOT FOUND</>}/>
-        <Route path= {PublicRoutes.LOGIN} element={<Login/>}/>
-        <Route element= {<AuthGuard/>}>
-          <Route path= {`${PrivateRoutes.DASHBOARD}/*`} element={<Dashboard/>}/>
-        </Route>
-      </Routes>
-      
-
-      </BrowserRouter>
-      
+      <Suspense fallback={<>Loading</>}>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Logout />
+            <RoutesWithNotFound>
+              <Route path="/" element={<Navigate to={PrivateRoutes.PRIVATE} />} />
+              <Route path={PublicRoutes.LOGIN} element={<Login />} />
+              <Route element={<AuthGuard privateValidation={true}/>}>
+                <Route path={`${PrivateRoutes.PRIVATE}/*`} element={<Private />} />
+              </Route>
+              <Route element={<RolGuard rol={Roles.ADMIN}/>}>
+                <Route path={`${PrivateRoutes.DASHBOARD}/*`} element={<Dashboard />} />
+              </Route>
+            </RoutesWithNotFound>
+          </BrowserRouter>
+        </Provider>
+      </Suspense>
     </div>
   )
 }

@@ -1,13 +1,17 @@
+import { Roles } from "./roles";
+
 export interface User{
     id: string;
     name: string;
     email?: string;
+    rol?: Roles
 }
 
 export const UserEmptyState: User= {
     id: '',
     name: '',
-    email: ''
+    email: '',
+    rol: Roles.USER
 }
 
 export interface ApiUser{
