@@ -14,12 +14,43 @@ export const UserEmptyState: User= {
     rol: Roles.USER
 }
 
-export interface ApiUser{
-    codigo: string;
-    nombre: string;
+interface Origin {
+    name: string
+    url: string
 }
 
-export const ApiUserEmptyState: ApiUser= {
-    codigo: '',
-    nombre: ''
+export interface ApiUser {
+    
+        id: number,
+        name: string
+        status: string
+        species: string
+        type: string
+        gender: string
+        origin: Origin,
+        location: Origin,
+        image: string
+        episode: string[],
+        url: string
+        created: string
+      
 }
+ const ApiUserOrigin={
+    name: "",
+    url: ""
+  }
+
+export const ApiUserEmptyState: ApiUser = {
+    id: 2,
+    name: "",
+    status: "",
+    species: "",
+    type: "",
+    gender: "",
+    origin: ApiUserOrigin,
+    location: ApiUserOrigin,
+    image: "",
+    episode: [],
+    url: "",
+    created: ""
+  };

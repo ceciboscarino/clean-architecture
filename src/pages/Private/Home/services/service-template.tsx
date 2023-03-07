@@ -1,12 +1,15 @@
 import { serviceTemplateAdapter } from "../adapters/service-template.adapter"
+import axios from "axios";
+import { ApiUser, User } from '@/models/user.type';
 
-export const url = "http://url.io"
 
-export const serviceTemplate = async (url: string) => {
-    return fetch(url)
-    .then(res => res.json())
-    .then((res)=> serviceTemplateAdapter(res));
+
+
+export const url = "http://rickandmortyapi.com/api/character/2";
+
+
+export const serviceTemplate = (url: string): Promise<User> => {
+   return axios.get<ApiUser>(url)
+      .then((res) => (res.data))
+      .then((res) => serviceTemplateAdapter(res));
 };
-
-
-
