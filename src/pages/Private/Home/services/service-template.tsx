@@ -5,7 +5,7 @@ import { ApiUser, User } from '@/models/user.type';
 
 
 
-export const url = "http://rickandmortyapi.com/api/character/2";
+export const url = "http://rijjjjujckandmortyapi.com/api/character/2";
 
 
 export const serviceTemplate = (url: string): Promise<User> => {
