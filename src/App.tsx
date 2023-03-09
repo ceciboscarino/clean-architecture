@@ -15,6 +15,8 @@ const Login = lazy(() => import('./pages/Login/Login'))
 const Private = lazy(() => import('./pages/Private/Private'))
 import { Roles } from '@/models';
 import Dashboard from './pages/Private/Dashboard/Dashboard';
+import { SnackbarUtilitiesConfigurator } from './Utilities/snackbar-manager';
+import { SnackbarProvider } from 'notistack';
 
 function App() {
 
@@ -25,6 +27,8 @@ function App() {
     < div className='App'>
       <Suspense fallback={<>Loading</>}>
         <Provider store={store}>
+          <SnackbarProvider>
+            <SnackbarUtilitiesConfigurator />
           <BrowserRouter>
             <Logout />
             <RoutesWithNotFound>
@@ -38,6 +42,7 @@ function App() {
               </Route>
             </RoutesWithNotFound>
           </BrowserRouter>
+          </SnackbarProvider>
         </Provider>
       </Suspense>
     </div>

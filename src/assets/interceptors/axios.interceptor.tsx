@@ -1,5 +1,6 @@
 
 import { getValidationError } from '@/Utilities';
+import { SnackbarUtilities } from '@/Utilities/snackbar-manager';
 import axios, { AxiosRequestConfig } from 'axios';
 
 export const AxiosInterceptor = () => {
@@ -27,7 +28,7 @@ export const AxiosInterceptor = () => {
                 return response;
             },
             (error) => {
-                //SnackbarUtilities.error(getValidationError(error.code))
+                SnackbarUtilities.error(getValidationError(error.code))
                 console.log("error:",getValidationError(error.code))
                 return Promise.reject(error);
             });
